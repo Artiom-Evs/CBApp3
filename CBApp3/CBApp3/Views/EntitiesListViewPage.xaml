@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CBApp3.Views.EntitiesListViewPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Frame BackgroundColor="#2196F3"
+                   Padding="10">
+                <StackLayout>
+                    <Label Text="{Binding Name}" 
+                           HorizontalTextAlignment="Center" 
+                           FontSize="24" />
+                    <Label Text="{Binding Date}" 
+                           HorizontalTextAlignment="Center" 
+                           FontSize="16" />
+                </StackLayout>
+            </Frame>
+
+            <ListView ItemsSource="{Binding Entities}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Name}"
+                               FontSize="Medium" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
