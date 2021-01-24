@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell xmlns="http://xamarin.com/schemas/2014/forms"
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:pages="clr-namespace:CBApp3.Pages"
+       xmlns:views="clr-namespace:CBApp3.Views"
        x:Class="CBApp3.AppShell"
        Title="Главная">
 
@@ -34,7 +34,7 @@
                     Route="groups">
             <Tab Title="НепонятноЧто!">
                 <ShellContent>
-                    <pages:Page1/>
+                    <views:EntitiesListViewPage/>
                 </ShellContent>
             </Tab>
         </FlyoutItem>
@@ -43,7 +43,7 @@
                     Route="teachers">
             <Tab Title="НепонятноЧто2">
                 <ShellContent>
-                    <pages:Page2/>
+                    <views:EntitiesListViewPage/>
                 </ShellContent>
             </Tab>
         </FlyoutItem>

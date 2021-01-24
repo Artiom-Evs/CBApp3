@@ -8,8 +8,6 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using CBApp3.Domain.Services;
-
 namespace CBApp3
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]

@@ -6,13 +6,13 @@ namespace CBApp3.Domain.Models
 {
     public class Day
     {
-        public string Date { get; set; }
-        public string[][] Lessons { get; set; }
+        public string Date { get; set; }public int Number { get; set; }
+        public List<string[]> Lessons { get; set; }
 
         public Day()
         {
             this.Date = "";
-            this.Lessons.Initialize();
+            this.Lessons = new List<string[]>();
         }
 
         public override string ToString()

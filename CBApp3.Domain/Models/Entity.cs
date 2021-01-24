@@ -8,12 +8,14 @@ namespace CBApp3.Domain.Models
     {
         public string Name { get; set; }
         public string Date { get; set; }
+        public int Number { get; set; }
         public List<Day> Days { get; set; }
 
         public Entity()
         {
             this.Name = "";
             this.Date = "";
+            this.Number = 0;
             this.Days = new List<Day>();
         }
 

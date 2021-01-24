@@ -12,7 +12,7 @@ namespace CBApp3.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class EntitiesListViewPage : ContentPage
     {
-public EntitiesListViewPage()
+        public EntitiesListViewPage()
         {
             InitializeComponent();
 
