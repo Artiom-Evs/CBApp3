@@ -14,6 +14,7 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Essentials;
 
+[assembly: Dependency(typeof(CBApp3.Droid.Services.LocalPath))]
 namespace CBApp3.Droid.Services
 {
     public class LocalPath : CBApp3.Services.ILocalPath

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
+using CBApp3.Domain.Services;
+using CBApp3.Views;
+
 namespace CBApp3
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
@@ -17,7 +20,7 @@ namespace CBApp3
         {
             InitializeComponent();
         }
-        
+
         private async void MenuItem_Clicked(object sender, EventArgs e)
         {
             await DisplayAlert("Обновить данные", "Функция обновления данных пока не доступна", "ОК");

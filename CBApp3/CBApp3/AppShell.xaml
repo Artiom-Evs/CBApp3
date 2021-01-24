@@ -27,23 +27,23 @@
                    Style="{DynamicResource Key=headerLabel}"/>
         </StackLayout>
     </Shell.FlyoutHeader>
-
+    
     <Shell.Items>
-        <FlyoutItem Title="Расписание групп" 
+        <FlyoutItem Title="Расписание групп"
                     Icon="icon.png"
                     Route="groups">
-            <Tab Title="НепонятноЧто!">
-                <ShellContent>
-                    <views:EntitiesListViewPage/>
+            <Tab>
+                <ShellContent >
+                    <views:EntitiesListViewPage />
                 </ShellContent>
             </Tab>
         </FlyoutItem>
         <FlyoutItem Title="Расписание преподавателей" 
                     Icon="icon.png"
                     Route="teachers">
-            <Tab Title="НепонятноЧто2">
+            <Tab>
                 <ShellContent>
-                    <views:EntitiesListViewPage/>
+                    <views:EntitiesListViewPage />
                 </ShellContent>
             </Tab>
         </FlyoutItem>
