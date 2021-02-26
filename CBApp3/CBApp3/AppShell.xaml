@@ -1,58 +1,54 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-       xmlns:views="clr-namespace:CBApp3.Views"
-       x:Class="CBApp3.AppShell"
-       Title="Главная">
+       xmlns:local="clr-namespace:CBApp3.Views"
+       xmlns:app="clr-namespace:CBApp3"
+       Title="CBApp3"
+       x:Class="CBApp3.AppShell">
+
+    <!--
+        The overall app visual hierarchy is defined here, along with navigation.
+    
+        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
+    -->
 
     <Shell.Resources>
         <ResourceDictionary>
-            <Style TargetType="Label" 
-                   BaseResourceKey="headerLabel" 
-                   ApplyToDerivedTypes="False" Class="Label">
-                <Setter Property="TextColor" Value="Black"/>
+            <Style x:Key="BaseStyle" TargetType="Element">
+                <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.ForegroundColor" Value="White" />
+                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
+                <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
+                <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
+                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
             </Style>
+            <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
+            <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
         </ResourceDictionary>
     </Shell.Resources>
 
-    <Shell.FlyoutHeader>
-        <StackLayout Padding="10" BackgroundColor="White">
-            <Label Text="Меню" HorizontalTextAlignment="Center"/>
-            <Image Source="launcher_foreground.png" HeightRequest="100"/>
-            <Label Text="ColledgeBrowser" 
-                   HorizontalTextAlignment="Center"
-                   Style="{DynamicResource Key=headerLabel}"/>
-            <Label Text="Приветствует вас!" 
-                   HorizontalTextAlignment="Center"
-                   Style="{DynamicResource Key=headerLabel}"/>
-        </StackLayout>
-    </Shell.FlyoutHeader>
-    
-    <Shell.Items>
-        <FlyoutItem Title="Расписание групп"
-                    Icon="icon.png"
-                    Route="groups">
-            <Tab>
-                <ShellContent >
-                    <views:EntitiesListViewPage />
-                </ShellContent>
-            </Tab>
-        </FlyoutItem>
-        <FlyoutItem Title="Расписание преподавателей" 
-                    Icon="icon.png"
-                    Route="teachers">
-            <Tab>
-                <ShellContent>
-                    <views:EntitiesListViewPage />
-                </ShellContent>
-            </Tab>
-        </FlyoutItem>
+    <TabBar>
+        <ShellContent Title="Группы" 
+                      Icon="icon_about.png" 
+                      Route="AboutPage" 
+                      ContentTemplate="{DataTemplate local:EntitiesListViewPage}" 
+                      BindingContext="{Binding Source={x:Static app:App.GroupsList}}" />
+        <ShellContent Title="Преподаватели" 
+                      Icon="icon_feed.png" 
+                      ContentTemplate="{DataTemplate local:EntitiesListViewPage}"
+                      BindingContext="{Binding Source={x:Static app:App.TeachersList}}"/>
+    </TabBar>
 
-        <MenuItem Text="Обновить данные" 
-                  IconImageSource="icon.png" 
-                  Clicked="MenuItem_Clicked"/>
-        <MenuItem Text="Выход"
-                  IconImageSource="icon.png" 
-                  Clicked="MenuItem_Clicked_1"/>
-    </Shell.Items>
+    <!--
+        If you would like to navigate to this content you can do so by calling
+        await Shell.Current.GoToAsync("//LoginPage");
+    
+    <TabBar>
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+    </TabBar>
+    -->
+
 </Shell>

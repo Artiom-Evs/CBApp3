@@ -2,28 +2,45 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CBApp3.Views.EntitiesListViewPage">
+
     <ContentPage.Content>
         <StackLayout>
-            <Frame BackgroundColor="#2196F3"
-                   Padding="10">
-                <StackLayout>
-                    <Label Text="{Binding Name}" 
+            <!--
+            <StackLayout x:Name="waitLayer"
+                         VerticalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="True"
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="CenterAndExpand"
+                                   Color="#2196F3" />
+            </StackLayout>
+            -->
+            <StackLayout x:Name="contentLayer"
+                         IsVisible="true">
+                <Frame BackgroundColor="#2196F3"
+                       Padding="10">
+                    <StackLayout>
+                        <Label Text="{Binding Name}" 
                            HorizontalTextAlignment="Center" 
                            FontSize="24" />
-                    <Label Text="{Binding Date}" 
+                        <Label Text="{Binding Date}" 
                            HorizontalTextAlignment="Center" 
                            FontSize="16" />
-                </StackLayout>
-            </Frame>
+                    </StackLayout>
+                </Frame>
 
-            <ListView ItemsSource="{Binding Entities}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Label Text="{Binding Name}"
+                <ListView x:Name="listView"
+                          >
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding}" />
+                            <!--
+                            <Label Text="{Binding}"
                                FontSize="Medium" />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                            -->
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout >
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

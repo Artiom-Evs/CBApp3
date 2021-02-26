@@ -1,33 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+
+using System.ComponentModel;
+
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using CBApp3.Domain.ViewModels;
+using CBApp3.Domain.Models;
 
 namespace CBApp3.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty("Name", "name")]
+    
     public partial class EntitiesListViewPage : ContentPage
     {
+        EntitiesListViewModel viewModel;
+        
         public EntitiesListViewPage()
         {
             InitializeComponent();
-
-            this.BindingContext = new EntitysListViewModel();
         }
-        
-        public string Name
+
+        protected override void OnAppearing()
         {
-            get { return Name; }
-            set
+            this.viewModel = (EntitiesListViewModel)this.BindingContext;
+
+            this.viewModel.ContentChanged += UpdateContent;
+
+            this.FindByName<ListView>("listView").ItemsSource = this.viewModel.Entities;
+            //this.FindByName<ListView>("listView").BindingContext = this.viewModel;
+        }
+
+        private void UpdateContent(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "EntitiesList")
             {
-                Name = Uri.UnescapeDataString(value);
+                UpdateChildrenLayout();
             }
         }
     }

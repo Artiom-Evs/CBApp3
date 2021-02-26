@@ -1,54 +1,47 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace CBApp3.Domain.Services
 {
-    public static class DataController
+public static class DataController
     {
-        public static void LoadHtmlPage(string htmlAddress, string path)
+        public static string GetFileText(string path)
         {
-            using (System.Net.WebClient client = new System.Net.WebClient())
+            if (File.Exists(path))
             {
-                client.DownloadFile(new System.Uri(htmlAddress), path);
+                using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read))
+                {
+                    using (StreamReader sr = new StreamReader(fs))
+                    {
+                        return sr.ReadToEnd();
+                    }
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException("Файл не был загружен.");
             }
         }
-        public static Task LoadHtmlPageAsync(string htmlAddress, string path)
+
+        public static Task<string> LoadPageText(string uri)
+        {
+            using (WebClient wc = new WebClient())
+            {
+                return wc.DownloadStringTaskAsync(new Uri(uri));
+            }   
+        }
+
+        public static Task LoadPageFile(string uri, string path)
         {
             //преподаватели "http://mgke.minsk.edu.by/ru/main.aspx?guid=3811"
             //учащиеся "http://mgke.minsk.edu.by/ru/main.aspx?guid=3791"
 
-            using (System.Net.WebClient client = new System.Net.WebClient())
+            using (WebClient wc = new WebClient())
             {
-                return client.DownloadFileTaskAsync(new System.Uri(htmlAddress), path);
+                return wc.DownloadFileTaskAsync(new System.Uri(uri), path);
             }
-        }
-
-        public static Task<Models.EntitiesList> DataProcessing(string htmlFilePath, bool isGroup)
-        {
-            Parser parser = new Parser();
-
-            return Task.Run(() => parser.ParsePage(htmlFilePath, isGroup));
-        }
-        public static async Task<Models.EntitiesList> DataProcessing(Task loadTask, string htmlFilePath, bool isGroup)
-        {
-            Parser parser = new Parser();
-
-            loadTask.Wait();
-
-            return parser.ParsePage(htmlFilePath, isGroup);
-        }
-        public static async Task<Models.EntitiesList> DataProcessing(string httpAddress, string htmlFilePath, bool isGroup)
-        {
-            Task loadTask = LoadHtmlPageAsync(httpAddress, htmlFilePath);
-
-            Parser parser = new Parser();
-
-            loadTask.Wait();
-
-            return parser.ParsePage(htmlFilePath, isGroup);
         }
     }
 }
