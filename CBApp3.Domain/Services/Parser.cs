@@ -41,7 +41,7 @@ namespace CBApp3.Domain.Services
             //генерация очереди задач по разбору таблиц
             while (pc.Current != null)
             {
-                string elemName = pc.Current.InnerText;
+                string elemName = pc.Current.InnerText.Replace("Преподаватель - ", "");
                 pc.MoveNext();
                 string elemDate = pc.Current.InnerText;
                 pc.MoveNext();
