@@ -19,7 +19,7 @@ namespace CBApp3.Domain.Services
         public static EntitiesList ParsePage(string pageText, bool isGroup)
         {
             EntitiesList entitiesList = new EntitiesList(
-                (isGroup ? "Список групп" : "Список преподавателей"),
+                (isGroup ? "Группы" : "Преподаватели"),
                 isGroup, DateTime.Now.ToString("dd.MM.yyyy HH:mm"));
 
             Queue<Task<Entity>> queue = new Queue<Task<Entity>>();

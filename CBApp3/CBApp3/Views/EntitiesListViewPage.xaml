@@ -16,27 +16,27 @@
             -->
             <StackLayout x:Name="contentLayer"
                          IsVisible="true">
-                <Frame BackgroundColor="#2196F3"
-                       Padding="10">
-                    <StackLayout>
-                        <Label Text="{Binding Name}" 
-                           HorizontalTextAlignment="Center" 
-                           FontSize="24" />
-                        <Label Text="{Binding Date}" 
-                           HorizontalTextAlignment="Center" 
-                           FontSize="16" />
-                    </StackLayout>
-                </Frame>
-
-                <ListView x:Name="listView"
-                          >
+                <ListView x:Name="listView" ItemsSource="{Binding Path=Entities}">
+                    <ListView.Header>
+                        <Frame BackgroundColor="#2196F3">
+                            <StackLayout>
+                                <Label Text="{Binding Name}" 
+                                           HorizontalTextAlignment="Center" 
+                                           FontSize="Medium" />
+                                <Label Text="{Binding Date}" 
+                                           HorizontalTextAlignment="Center" 
+                                           FontSize="Medium" />
+                            </StackLayout>
+                        </Frame>
+                    </ListView.Header>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <TextCell Text="{Binding}" />
-                            <!--
-                            <Label Text="{Binding}"
-                               FontSize="Medium" />
-                            -->
+                            <ViewCell>
+                                <Label Text="{Binding}" 
+                                           TextColor="Black"
+                                           FontSize="Body"
+                                           Margin="10,0,0,0"/>
+                            </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>

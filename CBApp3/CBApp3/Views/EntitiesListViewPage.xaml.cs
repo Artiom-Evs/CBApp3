@@ -31,8 +31,7 @@ namespace CBApp3.Views
 
             this.viewModel.ContentChanged += UpdateContent;
 
-            this.FindByName<ListView>("listView").ItemsSource = this.viewModel.Entities;
-            //this.FindByName<ListView>("listView").BindingContext = this.viewModel;
+            this.FindByName<ListView>("listView").BindingContext = this.viewModel;
         }
 
         private void UpdateContent(object sender, PropertyChangedEventArgs e)
