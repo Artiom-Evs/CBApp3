@@ -30,7 +30,7 @@ namespace CBApp3.Views
             this.viewModel = (EntitiesListViewModel)this.BindingContext;
 
             this.viewModel.ContentChanged += UpdateContent;
-
+            
             this.FindByName<ListView>("listView").BindingContext = this.viewModel;
         }
 

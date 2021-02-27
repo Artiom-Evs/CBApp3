@@ -31,6 +31,7 @@ namespace CBApp3.Domain.ViewModels
                 }    
             }
         }
+
         public string Name
         {
             get { return this.EntitiesList.Name; }
@@ -44,6 +45,7 @@ namespace CBApp3.Domain.ViewModels
                 }
             }
         }
+
         public string Date
         {
             get { return this.EntitiesList.Date; }
@@ -57,6 +59,7 @@ namespace CBApp3.Domain.ViewModels
                 }
             }
         }
+
         public bool IsGroup
         {
             get { return this.EntitiesList.IsGroup; }
@@ -70,6 +73,7 @@ namespace CBApp3.Domain.ViewModels
                 }
             }
         }
+
         public List<Entity> Entities
         {
             get { return this.EntitiesList.Entities; }
@@ -84,19 +88,19 @@ namespace CBApp3.Domain.ViewModels
             }
         }
 
-        protected void OnContentChanged(string propertyName)
-        {
-            if (this.ContentChanged != null)
-            {
-                ContentChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
         protected void OnPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        protected void OnContentChanged(string propertyName)
+        {
+            if (this.ContentChanged != null)
+            {
+                ContentChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }

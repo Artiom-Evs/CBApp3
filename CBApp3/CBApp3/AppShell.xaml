@@ -32,12 +32,10 @@
 
     <TabBar>
         <ShellContent Title="Группы" 
-                      Icon="icon_about.png" 
                       Route="AboutPage" 
                       ContentTemplate="{DataTemplate local:EntitiesListViewPage}" 
                       BindingContext="{Binding Source={x:Static app:App.GroupsList}}" />
         <ShellContent Title="Преподаватели" 
-                      Icon="icon_feed.png" 
                       ContentTemplate="{DataTemplate local:EntitiesListViewPage}"
                       BindingContext="{Binding Source={x:Static app:App.TeachersList}}"/>
     </TabBar>

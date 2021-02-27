@@ -21,11 +21,13 @@
                         <Frame BackgroundColor="#2196F3">
                             <StackLayout>
                                 <Label Text="{Binding Name}" 
-                                           HorizontalTextAlignment="Center" 
-                                           FontSize="Medium" />
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="White"
+                                       FontSize="Medium" />
                                 <Label Text="{Binding Date}" 
-                                           HorizontalTextAlignment="Center" 
-                                           FontSize="Medium" />
+                                       HorizontalTextAlignment="Center" 
+                                       TextColor="White"
+                                       FontSize="Medium" />
                             </StackLayout>
                         </Frame>
                     </ListView.Header>
