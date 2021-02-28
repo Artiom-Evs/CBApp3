@@ -27,10 +27,12 @@
                                        HorizontalTextAlignment="Center"
                                        TextColor="White"
                                        FontSize="Medium" />
+                                <!--
                                 <Label Text="{Binding Date}" 
                                        HorizontalTextAlignment="Center" 
                                        TextColor="White"
                                        FontSize="Medium" />
+                                -->
                             </StackLayout>
                         </Frame>
                     </ListView.Header>

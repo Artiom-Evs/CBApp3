@@ -33,7 +33,27 @@ namespace CBApp3.Views
         {
             this.viewModel = (EntityViewModel)this.BindingContext ?? this.viewModel;
 
-            this.FindByName<ListView>("listView").BindingContext = this.viewModel;
+            this.listView.BindingContext = this.viewModel;
+
+            if (this.viewModel.Days == null) this.CreateNullMessage();
+        }
+
+        private void CreateNullMessage()
+        {
+            Grid grid = new Grid();
+            grid.RowDefinitions.Add(new RowDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            grid.Children.Add(
+                    new Label
+                    {
+                        Text = "Расписание отсутствует!",
+                        VerticalTextAlignment = TextAlignment.Center,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        FontSize = 18
+                    }, 0, 0);
+
+            this.Content = grid;
         }
 
         private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
