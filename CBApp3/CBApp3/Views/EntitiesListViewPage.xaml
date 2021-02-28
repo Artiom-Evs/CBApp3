@@ -16,7 +16,10 @@
             -->
             <StackLayout x:Name="contentLayer"
                          IsVisible="true">
-                <ListView x:Name="listView" ItemsSource="{Binding Path=Entities}">
+                <ListView x:Name="listView" 
+                          ItemsSource="{Binding Path=Entities}"
+                          ItemTapped="listView_ItemTapped"
+                          SelectionMode="None">
                     <ListView.Header>
                         <Frame BackgroundColor="#2196F3">
                             <StackLayout>

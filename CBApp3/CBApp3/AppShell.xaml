@@ -11,7 +11,7 @@
     
         https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
     -->
-
+    
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -32,10 +32,11 @@
 
     <TabBar>
         <ShellContent Title="Группы" 
-                      Route="AboutPage" 
+                      Route="GroupsPage" 
                       ContentTemplate="{DataTemplate local:EntitiesListViewPage}" 
                       BindingContext="{Binding Source={x:Static app:App.GroupsList}}" />
         <ShellContent Title="Преподаватели" 
+                      Route="TeachersPage"
                       ContentTemplate="{DataTemplate local:EntitiesListViewPage}"
                       BindingContext="{Binding Source={x:Static app:App.TeachersList}}"/>
     </TabBar>

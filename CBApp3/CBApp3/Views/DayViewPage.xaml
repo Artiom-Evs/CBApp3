@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CBApp3.Views.DayViewPage">
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout x:Name="stack">
+                <Frame BackgroundColor="#2196F3">
+                    <Label Text="{Binding Date}" 
+                                       HorizontalTextAlignment="Center"
+                                       TextColor="White"
+                                       FontSize="Medium" />
+                </Frame>
+                <ScrollView>
+                    <Grid x:Name="grid_1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ScrollView>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -102,7 +102,7 @@ namespace CBApp3.Domain.Services
                 .Elements("tr")
                 .Where(tr => tr.Elements("td").Count() % 2 == 1)
                 .Select(tr => tr.Elements("td")
-                .Select(td => td.InnerText.Trim().Replace("&nbsp;", " ")).ToList())
+                .Select(td => td.InnerText.Trim().Replace("&nbsp;", "-")).ToList())
                 .ToList();
             
             return CreateListDays(grid);

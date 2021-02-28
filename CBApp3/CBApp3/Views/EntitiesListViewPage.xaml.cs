@@ -25,9 +25,16 @@ namespace CBApp3.Views
             InitializeComponent();
         }
 
+        public EntitiesListViewPage(EntitiesListViewModel viewModel)
+        {
+            this.InitializeComponent();
+
+            this.viewModel = viewModel;
+        }
+
         protected override void OnAppearing()
         {
-            this.viewModel = (EntitiesListViewModel)this.BindingContext;
+            this.viewModel = (EntitiesListViewModel)this.BindingContext ?? this.viewModel;
 
             this.viewModel.ContentChanged += UpdateContent;
             
@@ -40,6 +47,15 @@ namespace CBApp3.Views
             {
                 UpdateChildrenLayout();
             }
+        }
+
+        private async void listView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            Entity entity = e.Item as Entity;
+
+            EntityViewModel entityViewModel = new EntityViewModel(entity);
+
+            await Shell.Current.Navigation.PushAsync(new EntityViewPage(entityViewModel));
         }
     }
 }
