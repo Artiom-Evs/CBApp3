@@ -58,24 +58,17 @@ namespace CBApp3
 
         public App()
         {
-             InitializeComponent();
-
-            string text = "";
-            if (Connection)
-            {
-                using (System.Net.WebClient wc = new System.Net.WebClient())
-                {
-                    text = wc.DownloadString(groupsHttpAddress);
-                }
-            }
-
-            Task task1 = Task.Run(() => UpdateData(GroupsList, true, groupsHttpAddress));
-            Task task2 = Task.Run(() => UpdateData(TeachersList, false, teachersHttpAddress));
-
-            task1.Wait();
-            task2.Wait();
+            InitializeComponent();
 
             MainPage = new AppShell();
+
+            if (Connection)
+            {
+                Task task1 = Task.Run(() => UpdateData(GroupsList, true, groupsHttpAddress));
+                Task task2 = Task.Run(() => UpdateData(TeachersList, false, teachersHttpAddress));
+
+                Task.WaitAll(task1, task2);
+            }
         }
 
         private void UpdateData(EntitiesListViewModel viewModel, bool isGroup, string url)

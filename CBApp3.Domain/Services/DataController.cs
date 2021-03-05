@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace CBApp3.Domain.Services
@@ -31,6 +32,14 @@ public static class DataController
             {
                 return wc.DownloadStringTaskAsync(new Uri(uri));
             }   
+        }
+        
+        public static Task<string> NewLoadPageText(string uri)
+        {
+            using (HttpClient hc = new HttpClient())
+            {
+                return hc.GetStringAsync(new Uri(uri));
+            }
         }
 
         public static Task LoadPageFile(string uri, string path)

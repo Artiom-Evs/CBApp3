@@ -16,5 +16,12 @@ namespace CBApp3
             Routing.RegisterRoute(nameof(DayViewPage), typeof(DayViewPage));
         }
 
+        protected async override void OnNavigated(ShellNavigatedEventArgs args)
+        {
+            if (!App.Connection)
+            {
+                await this.DisplayAlert("", "Отсутствует соединение с сетью Интернет!", "ОК");
+            }
+        }
     }
 }
