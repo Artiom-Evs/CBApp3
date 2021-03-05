@@ -39,7 +39,7 @@ namespace CBApp3.Views
 
         private void CreateGridContent()
         {
-            Grid grid = this.FindByName<Grid>("grid_1");
+            Grid grid = this.grid_1;
             List<string[]> lessons = this.viewModel.Lessons;
 
             for (int i = lessons.Count - 1; i >= 0; i--)
@@ -51,6 +51,12 @@ namespace CBApp3.Views
                 else break;
             }
 
+            if (lessons.Count == 0)
+            {
+                CreateNullMessage();
+                return;
+            }
+
             for (int i = 0; i < lessons.Count; i++)
             {
                 grid.RowDefinitions.Add(new RowDefinition
@@ -59,33 +65,49 @@ namespace CBApp3.Views
                 });
             }
 
-            var p = Padding;
-            p.Bottom = 10;
-
             for (int i = 0; i < lessons.Count; i++)
             {
-                grid.Children.Add(
-                    new Label
-                    {
-                        Text = (i + 1).ToString(),
-                        VerticalTextAlignment = TextAlignment.Center,
-                        HorizontalTextAlignment = TextAlignment.Start,
-                        FontSize = 18,
-                        Padding = p
-                    }, 0, i);
+                string text1, text2;
 
-                grid.Children.Add(
+                text1 = (i + 1).ToString();
+                CreateGridItem(grid, text1, 0, i);
+
+                text2 = lessons[i][0].Replace(") ", ")\n").Replace("1.", "1. ").Replace(" 2.", "\n2. ").Replace(" 3.", "\n3. ") + "\n" + lessons[i][1];
+                CreateGridItem(grid, text2, 1, i);
+            }
+
+            this.UpdateChildrenLayout();
+        }
+
+        private void CreateGridItem(Grid grid, string text, int x, int y)
+        {
+            grid.Children.Add(
                     new Label
                     {
-                        Text = lessons[i][0].Replace(") ", ")\n").Replace("1.", "1. ").Replace(" 2.", "\n2. ").Replace(" 3.", "\n3. ") + "\n" + lessons[i][1],
+                        Text = text,
                         VerticalTextAlignment = TextAlignment.Center,
                         HorizontalTextAlignment = TextAlignment.Center,
                         FontSize = 18,
-                        Padding = p
-                    }, 1, i);
+                        Padding = 10
+                    }, x, y);
+        }
 
-                this.UpdateChildrenLayout();
-            }
+        private void CreateNullMessage()
+        {
+            Grid grid = new Grid();
+            grid.RowDefinitions.Add(new RowDefinition());
+            grid.ColumnDefinitions.Add(new ColumnDefinition());
+
+            grid.Children.Add(
+                    new Label
+                    {
+                        Text = "Расписание отсутствует!",
+                        VerticalTextAlignment = TextAlignment.Center,
+                        HorizontalTextAlignment = TextAlignment.Center,
+                        FontSize = 18
+                    }, 0, 0);
+
+            this.Content = grid;
         }
     }
 }
