@@ -60,14 +60,19 @@ namespace CBApp3
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
-
-            if (Connection)
+            if (App.Connection)
             {
                 Task task1 = Task.Run(() => UpdateData(GroupsList, true, groupsHttpAddress));
                 Task task2 = Task.Run(() => UpdateData(TeachersList, false, teachersHttpAddress));
 
-                Task.WaitAll(task1, task2);
+                MainPage = new AppShell();
+
+                task1.Wait();
+                task2.Wait();
+            }
+            else
+            {
+                MainPage = new AppShell();
             }
         }
 

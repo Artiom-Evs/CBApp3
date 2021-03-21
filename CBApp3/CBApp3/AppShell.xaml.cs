@@ -20,7 +20,7 @@ namespace CBApp3
         {
             if (!App.Connection)
             {
-                await this.DisplayAlert("", "Отсутствует соединение с сетью Интернет!", "ОК");
+                await this.DisplayAlert("Внимание!", "Вы не подключены к сети интернет!", "ОК");
             }
         }
     }
