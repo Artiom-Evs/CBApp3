@@ -11,6 +11,13 @@ namespace CBApp3.Services
         public event ItemSelected ItemSelectedHandler;
         public IList<T> Items { get; set; }
 
+        public MySearchHandler() { }
+
+        public MySearchHandler(List<T> items)
+        {
+            this.Items = items;
+        }
+
         protected override void OnQueryChanged(string oldValue, string newValue)
         {
             base.OnQueryChanged(oldValue, newValue);

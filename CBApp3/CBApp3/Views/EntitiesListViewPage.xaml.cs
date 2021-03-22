@@ -11,15 +11,16 @@ using Xamarin.Forms.Xaml;
 
 using CBApp3.Domain.ViewModels;
 using CBApp3.Domain.Models;
+using CBApp3.Services;
 
 namespace CBApp3.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    
+
     public partial class EntitiesListViewPage : ContentPage
     {
         EntitiesListViewModel viewModel;
-        
+
         public EntitiesListViewPage()
         {
             InitializeComponent();
@@ -37,8 +38,17 @@ namespace CBApp3.Views
             this.viewModel = (EntitiesListViewModel)this.BindingContext ?? this.viewModel;
 
             this.viewModel.ContentChanged += UpdateContent;
-            
-            this.FindByName<ListView>("listView").BindingContext = this.viewModel;
+
+            this.listView.BindingContext = this.viewModel;
+
+            MySearchHandler<Entity> searchHandler = new MySearchHandler<Entity>();
+            searchHandler.Items = this.viewModel.Entities;
+            searchHandler.Placeholder = "Найти...";
+            searchHandler.ShowsResults = true;
+
+            Shell.SetSearchHandler(this, searchHandler);
+
+            searchHandler.ItemSelectedHandler += OnSearchListViewItemSelected;
         }
 
         private void UpdateContent(object sender, PropertyChangedEventArgs e)
@@ -54,6 +64,13 @@ namespace CBApp3.Views
             Entity entity = e.Item as Entity;
 
             EntityViewModel entityViewModel = new EntityViewModel(entity);
+
+            await Shell.Current.Navigation.PushAsync(new EntityViewPage(entityViewModel));
+        }
+
+        private async void OnSearchListViewItemSelected(object sender, Entity item)
+        {
+            EntityViewModel entityViewModel = new EntityViewModel(item);
 
             await Shell.Current.Navigation.PushAsync(new EntityViewPage(entityViewModel));
         }
