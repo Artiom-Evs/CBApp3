@@ -7,7 +7,7 @@ namespace CBApp3.Services
 {
     public class MySearchHandler<T> : SearchHandler
     {
-        public delegate void ItemSelected(object handler, T selectedItem);
+        public delegate void ItemSelected(object handler, ItemTappedEventArgs e);
         public event ItemSelected ItemSelectedHandler;
         public IList<T> Items { get; set; }
 
@@ -34,11 +34,9 @@ namespace CBApp3.Services
             }
         }
 
-        protected override async void OnItemSelected(object item)
+        protected override void OnItemSelected(object item)
         {
             base.OnItemSelected(item);
-
-            await Task.Delay(1000);
 
             this.MyOnItemSelected((T)item);
         }
@@ -47,7 +45,7 @@ namespace CBApp3.Services
         {
             if (ItemSelectedHandler != null)
             {
-                this.ItemSelectedHandler(this, selectedItem);
+                this.ItemSelectedHandler(this, new ItemTappedEventArgs(Items, selectedItem, Items.IndexOf(selectedItem)));
             }
         }
     }

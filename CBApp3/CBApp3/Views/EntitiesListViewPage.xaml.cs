@@ -45,10 +45,11 @@ namespace CBApp3.Views
             searchHandler.Items = this.viewModel.Entities;
             searchHandler.Placeholder = "Найти...";
             searchHandler.ShowsResults = true;
-
+            searchHandler.FontSize = 20;
+            
             Shell.SetSearchHandler(this, searchHandler);
 
-            searchHandler.ItemSelectedHandler += OnSearchListViewItemSelected;
+            searchHandler.ItemSelectedHandler += listView_ItemTapped;
         }
 
         private void UpdateContent(object sender, PropertyChangedEventArgs e)
@@ -64,13 +65,6 @@ namespace CBApp3.Views
             Entity entity = e.Item as Entity;
 
             EntityViewModel entityViewModel = new EntityViewModel(entity);
-
-            await Shell.Current.Navigation.PushAsync(new EntityViewPage(entityViewModel));
-        }
-
-        private async void OnSearchListViewItemSelected(object sender, Entity item)
-        {
-            EntityViewModel entityViewModel = new EntityViewModel(item);
 
             await Shell.Current.Navigation.PushAsync(new EntityViewPage(entityViewModel));
         }
