@@ -89,5 +89,10 @@ namespace CBApp3.Domain.ViewModels
                 ContentChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        public override string ToString()
+        {
+            return this.Name;
+        }
     }
 }

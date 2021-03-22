@@ -11,7 +11,7 @@ namespace CBApp3
         public AppShell()
         {
             InitializeComponent();
-
+            
             Routing.RegisterRoute(nameof(EntityViewPage), typeof(EntityViewPage));
             Routing.RegisterRoute(nameof(DayViewPage), typeof(DayViewPage));
         }
