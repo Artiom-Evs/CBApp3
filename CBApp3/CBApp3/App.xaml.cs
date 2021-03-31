@@ -6,7 +6,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using CBApp3.Domain.ViewModels;
-using CBApp3.Domain.Services;
 
 namespace CBApp3
 {
@@ -16,14 +15,18 @@ namespace CBApp3
             @"http://mgke.minsk.edu.by/ru/main.aspx?guid=3791";
         public static string teachersHttpAddress =
             @"http://mgke.minsk.edu.by/ru/main.aspx?guid=3811";
+        /*
         public static string groupsFilePath =
             DependencyService.Get<Services.ILocalPath>().GetFullPath("groups.xml");
         public static string teachersFilePath =
             DependencyService.Get<Services.ILocalPath>().GetFullPath("teachers.xml");
+        */
 
         private static EntitiesListViewModel groupsList;
         private static EntitiesListViewModel teachersList;
-        
+        private static DataController groupsController;
+        private static DataController teachersController;
+
         public static EntitiesListViewModel GroupsList
         {
             get
@@ -48,6 +51,30 @@ namespace CBApp3
                 return teachersList;
             }
         }
+        public static DataController GroupsController
+        {
+            get
+            {
+                if (groupsController == null)
+                {
+                    groupsController = new DataController(GroupsList, groupsHttpAddress, true);
+                    return groupsController;
+                }
+                return groupsController;
+            }
+        }
+        public static DataController TeachersController
+        {
+            get
+            {
+                if (teachersController == null)
+                {
+                    teachersController = new DataController(TeachersList, teachersHttpAddress, false);
+                    return teachersController;
+                }
+                return teachersController;
+            }
+        }
         public static bool Connection
         {
             get
@@ -62,24 +89,18 @@ namespace CBApp3
 
             if (App.Connection)
             {
-                Task task1 = Task.Run(() => UpdateData(GroupsList, true, groupsHttpAddress));
-                Task task2 = Task.Run(() => UpdateData(TeachersList, false, teachersHttpAddress));
+                GroupsController.UpdateData();
+                TeachersController.UpdateData();
 
                 MainPage = new AppShell();
 
-                task1.Wait();
-                task2.Wait();
+                GroupsController.Loading.Wait();
+                TeachersController.Loading.Wait();
             }
             else
             {
                 MainPage = new AppShell();
             }
-        }
-
-        private void UpdateData(EntitiesListViewModel viewModel, bool isGroup, string url)
-        {
-            viewModel.EntitiesList =
-                Parser.ParsePage(DataController.LoadPageText(url), isGroup);
         }
 
         protected override void OnStart()
